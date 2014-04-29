@@ -2,6 +2,7 @@ import sublime, sublime_plugin
 import subprocess
 import string
 import re
+import locale
 
 # Install
 # (rvm use system)
@@ -41,7 +42,7 @@ class FlogCommand(sublime_plugin.WindowCommand):
 
     # Get the results of the analysis
     output =  subprocess.Popen( ("flog " + file_name), stdout=subprocess.PIPE, shell=True).stdout.read()
-    lines = string.split(output, '\n')
+    lines = output.decode('utf-8').split('\n')
 
     # Extract the headers
     total_line = lines.pop(0)
